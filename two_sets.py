@@ -1,27 +1,24 @@
-n = int(input())
 
-def two_sets(n):
-    nums = [i+1 for i in range(n)]
-    s = sum(nums)//2
-    if s != sum(nums)/2:
-        return "NO"
-    ls,ds = [],[]
-    
-    for i in reversed(range(len(nums))):
-        if s - nums[i] >= 0:
-            ds.append(nums[i])
-            s -= nums[i]
+# find the max value achievable 
+values = [3, 4, 5]
+weights = [2, 3, 4]
+k = 5
+ls = [(v,w) for v,w in zip(values,weights)]
+# expected 7
+
+"""
+20 12 6
+4  3  2
+
+"""
+dp = [[0 for _ in range(k+1)] for _ in range(len(weights)+1)]
+
+for i in range(1,len(dp)):
+    for j in range(1,len(dp[0])):
+        if j < weights[i-1]:
+            dp[i][j] = dp[i-1][j]
         else:
-            ls.append(nums[i])
-    
-    if s:
-        return "NO"
-    else:
-        res = [ls,ds]
-        res = sorted(res,key=lambda x:len(x),reverse=True)
-        out = "YES"
-        for ls in res:
-            out += "\n" + str(len(ls)) + "\n" + " ".join([str(x) for x in ls])
-        return out
+            dp[i][j] = max(dp[i-1][j],dp[i-1][j-weights[i-1]] + values[i-1])
 
-print(two_sets(n))
+for l in dp:
+    print(l)
