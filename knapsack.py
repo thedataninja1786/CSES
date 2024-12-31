@@ -14,3 +14,5 @@ def zero_one(values,weights,capacity):
                 dp[i][j] = max(dp[i-1][j],dp[i-1][j-weights[i-1]] + values[i-1])
 
     return dp[-1][-1]
+
+print(zero_one(values,weights,k))
