@@ -2,7 +2,7 @@
 n = int(input())
 
 def trailing_zeroes(n):
-    """ Legendre's formula 
+    """ Legendre's formula -> largest power of a prime p that divides a factorial n!
         Trailing zeroes are caused by 10, which is the product of 
         2 and 5. Devide by either factor until the denominator 5**p > n
     """
