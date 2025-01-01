@@ -1,6 +1,7 @@
 n = int(input())
 
 def two_sets(n):
+    # no duplicates
     nums = [i+1 for i in range(n)]
     s = sum(nums)//2
     if s != sum(nums)/2:
@@ -25,3 +26,21 @@ def two_sets(n):
         return out
 
 print(two_sets(n))
+
+def two_sets_duplicate(nums):
+    t = sum(nums) // 2
+    if t != sum(nums)/2:
+        return False
+
+    s = set()
+    for i in range(len(nums)):
+        ss = set()
+        for x in s:
+            ss.add(nums[i] + x)
+        s.add(nums[i])
+        s.update(ss)
+    
+    return t in s
+        
+
+    
