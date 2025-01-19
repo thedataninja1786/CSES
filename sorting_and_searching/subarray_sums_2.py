@@ -1,27 +1,18 @@
 import sys
-from collections import defaultdict
+from collections import defaultdict,Counter
 
 data = sys.stdin.read().split()
+_, t = int(data[0]), int(data[1])
+nums = list(map(int, data[2:]))
+s = cnt = 0 
+c = defaultdict(int)
+c[0] = 1
+for x in nums:
+    s += x
 
+    if s - t in c:
+        cnt += c[s-t]
 
-def subarray_target_sum_negtaive(data):
-    _, t = int(data[0]), int(data[1])
-    nums = list(map(int, data[2:]))
+    c[s] += 1
 
-    s = 0
-    cnt = 0 
-    c = defaultdict(int)
-
-    c[0] = 1
-    for i in range(len(nums)):
-        s += nums[i]
-
-        if s - t in c:
-            cnt += c[s - t]
-
-        c[s] += 1
-
-
-    return cnt
-
-print(subarray_target_sum_negtaive(data))
+print(cnt)
